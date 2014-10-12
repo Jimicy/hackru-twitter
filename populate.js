@@ -48,6 +48,7 @@ for (var i = 0; i < screen_names.length; i++){
 
 function populate(l_maxid, l_screen_name, l_count, l_iteration){
 		T.get('statuses/user_timeline', {trim_user:1, max_id: l_maxid, screen_name: l_screen_name, count: l_count},  function (err, data, response) {
+			
   			console.log(data.length);
   			if (data.length == 0){
   				return;
@@ -70,7 +71,18 @@ function populate(l_maxid, l_screen_name, l_count, l_iteration){
 	  			} else if (data[j]["text"].toLowerCase().indexOf("book") > 0){
 	  				typeString = "resource"
 	  			}
+	  			T.get('statuses/oembed', {id:data[j]["id_str"]},  function (err2, data2, response2) {
+	  				var fileNameIndex = data2["url"].lastIndexOf("/") + 1;
+					var filename = data2["url"].substr(fileNameIndex);		
+	  				db.tweets.findAndModify({
+					    query: { tweetid: filename },
+					    update: { $set: { ehtml: data2["html"] } },
+					    new: true
+					}, function(err, doc, lastErrorObject) {
+					    // doc.tag === 'maintainer'
+					});
 
+				});
 	  			db.tweets.save({tweetid: data[j]["id_str"], text: data[j]["text"], type: typeString, city: "Toronto"}, function(err, saved) {
 				  if( err || !saved ) console.log("tweet not saved");
 				  else console.log("tweet saved");
@@ -79,6 +91,7 @@ function populate(l_maxid, l_screen_name, l_count, l_iteration){
   			if (l_iteration > 0 && data.length == l_count){
   				populate(maxid, l_screen_name, l_count, l_iteration-1);
   			}
+  			
   			//console.log(data);
 		})
 }
