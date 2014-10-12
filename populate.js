@@ -13,7 +13,7 @@ var T = new Twit({
 var maxid;
 var tweetsPerRequest = 200;
 var requestsPerUser = 16;
-var screen_names = ["OperationL2P"];
+var screen_names = ["Jim_icy"];
 
 
 var databaseUrl = "foxhound"; // "username:password@example.com/mydb"

@@ -1,0 +1,31 @@
+{
+  "name": "hackru-twitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "dependencies": {
+    "express": "^4.9.7",
+    "express-handlebars": "^1.1.0",
+    "mongodb": "^1.4.19",
+    "mongojs": "^0.15.1",
+    "mongoose": "^3.8.17",
+    "node-twitter-api": "^1.4.0",
+    "nodemon": "^1.2.1",
+    "sleep": "^1.1.8",
+    "twit": "^1.1.18"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jimicy/hackru-twitter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jimicy/hackru-twitter/issues"
+  },
+  "homepage": "https://github.com/Jimicy/hackru-twitter"
+}
